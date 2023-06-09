@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes clients</title>
+    <title>Products</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="logo">
+        </a></div>
+        <nav >
+            <ul class="menu">
+                <li><a href="{% url 'home' %}">Acceuil</a></li>
+                <li><a href="{% url 'customers' %}">Customer</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'categories' %}">Catgeories</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h4>Liste des clients</h4>
+                <a href="{% url 'create_customer' %}" class="btn btn-success"> ajouter</a>
+            </div>
+
+            <div class="card-body">
+                <table class="table">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Avatar</th>
+                            <th>ID</th>
+                            <th>Reference</th>
+                            <th>Nom Prénom</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                            <tr>
+                                <td>
+                                    {% if customer.image %}
+                                        <img src="{{ customer.image.url }}" alt="{{ customer.lastname }}" class="avatar">
+                                    {% else %}
+                                        <img src="{% static 'images/default-avatar.png' %}" alt="{{ customer.lastname }}" class="avatar">
+                                    {% endif %}
+                                
+                                </td>
+                                <td>{{ customer.id }}</td>
+                                <td>{{ customer.num_ref}}</td>
+                                <td>{{ customer.firstname}} {{ customer.lastname }}</td>
+                                <td>{{ customer.get_customer_type_display }}</td>
+                                <td>
+                                    <a href="{% url 'show_customer' customer.id  %}" class="btn btn-info"> show</a>
+                                    <a href="{% url 'update_customer' customer.id %}" class="btn btn-warning"> edit</a>
+                                    <a href="{% url 'delete_customer' customer.id %}" class="btn btn-danger"> delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

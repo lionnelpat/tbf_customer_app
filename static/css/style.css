@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: brown;
+    color: white;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+}
+
+.menu li {
+    margin: 0px 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+img.avatar{
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+}
+
+table tbody tr td img.cat_img {
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+}

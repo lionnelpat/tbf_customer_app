@@ -1,23 +1,22 @@
-"""DjangoApp URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
-from core.views import home
+from customer.views import all_customers, welcome, all_products, all_categories, detail_category
+from customer.views import create_customer, show_customer, delete_customer, update_customer
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home)
-]
+    path("", welcome, name="home"),
+    path("customers", all_customers, name="customers"),
+    path("products", all_products, name="products"),
+    path("categories", all_categories, name="categories"),
+    path("detail-category/<int:id>", detail_category, name="detail_category"),
+    path("create-customer", create_customer, name="create_customer"),
+    path("show-customer/<int:id>", show_customer, name="show_customer"),
+    path("delete-customer/<int:id>", delete_customer, name="delete_customer"),
+    path("update-customer/<int:id>",update_customer, name="update_customer"),
+
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
